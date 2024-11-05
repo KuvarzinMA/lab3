@@ -6,15 +6,18 @@
 #include <memory>
 using namespace std;
 
-class Department; // Предварительное объявление для использования в классе Employee
+class Department; // Предварительное объявление для использования в классе Employee, 
+// необходимо, когда два класса ссылаются друг на друга
 
 class Employee {
+    // Содержит приватные поля: name для имени сотрудника и department — указатель на объект Department.
 private:
     std::string name;
     Department* department;
 
 public:
-    // Конструктор
+    // Конструктор инициализирует эти поля. Список инициализации после двоеточия
+    // : передает значения для name и department, ускоряя работу, так как инициализация идет напрямую.
     Employee(const std::string& name, Department* department = nullptr)
         : name(name), department(department) {}
 
@@ -42,12 +45,14 @@ public:
 
 class Department {
 private:
+    // Поля класса: name — название отдела,
+    // head — указатель на начальника отдела (объект Employee), и employees — список сотрудников.
     std::string name;
     Employee* head;
     std::vector<Employee*> employees;
 
 public:
-    // Конструктор
+    // Конструктор инициализирует поля напрямую через список инициализации.
     Department(const std::string& name, Employee* head = nullptr)
         : name(name), head(head) {}
 
@@ -134,7 +139,7 @@ class Time {
 private:
     int seconds; // общее количество секунд с начала суток
 
-    // Метод для нормализации значения секунд в пределах суток
+    // Метод для нормализации значения секунд в пределах суток, чтобы всегда оставаться в пределах одного дня
     void normalize() {
         seconds %= 86400; // 86400 секунд в сутках
         if (seconds < 0) {
@@ -162,6 +167,7 @@ public:
         int hours = (seconds / 3600) % 24;
         int minutes = (seconds % 3600) / 60;
         int sec = seconds % 60;
+        // создает объект oss, который представляет собой поток вывода, работающий со строками
         std::ostringstream oss;
         oss << std::setw(2) << std::setfill('0') << hours << ":"
             << std::setw(2) << std::setfill('0') << minutes << ":"
