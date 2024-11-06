@@ -1,8 +1,8 @@
 
-#ifndef UNTITLED3_NAME_H
-#define UNTITLED3_NAME_H
+#ifndef UNTITLED3_TIME_H
+#define UNTITLED3_TIME_H
 
-#include "name.h"
+#include "time.h"
 #include <iostream>
 #include <string>
 #include <iomanip>
