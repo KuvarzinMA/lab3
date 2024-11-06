@@ -1,4 +1,4 @@
-#include "employes.h"
+#include "name.h"
 
 // Главная функция
 int main() {
