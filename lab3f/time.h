@@ -1,95 +1,34 @@
+// Time.h
+#ifndef TIME_H
+#define TIME_H
 
-#ifndef UNTITLED3_TIME_H
-#define UNTITLED3_TIME_H
-
-#include "time.h"
-#include <iostream>
 #include <string>
-#include <iomanip>
-#include <sstream>
-#include <vector>
-using namespace std;
-
-
 
 class Time {
 private:
-    int seconds; // общее количество секунд с начала суток
+    int seconds; // Количество секунд с начала суток
 
-    // Метод для нормализации значения секунд в пределах суток, чтобы всегда оставаться в пределах одного дня
-    void normalize() {
-        seconds %= 86400; // 86400 секунд в сутках
-        if (seconds < 0) {
-            seconds += 86400;
-        }
-    }
+    void normalize(); // Приведение секунд в диапазон 0–86399
 
 public:
-    // Конструктор по умолчанию
-    Time() : seconds(0) {}
+    // Конструкторы
+    Time();                      // Конструктор по умолчанию
+    Time(int sec);               // Конструктор с количеством секунд
+    Time(int hours, int minutes, int sec); // Конструктор с часами, минутами, секундами
 
-    // Конструктор с количеством секунд с начала суток
-    Time(int sec) : seconds(sec) {
-        normalize();
-    }
+    // Методы для получения времени в различных форматах
+    std::string getTextFormat() const;
+    void print() const;
 
-    // Конструктор с указанием часов, минут и секунд
-    Time(int hours, int minutes, int sec) {
-        seconds = hours * 3600 + minutes * 60 + sec;
-        normalize();
-    }
+    // Методы для получения текущего часа, минут с начала часа и секунд с начала минуты
+    int getCurrentHour() const;
+    int getMinutesFromCurrentHour() const;
+    int getSecondsFromCurrentMinute() const;
 
-    // Метод для получения текущего времени в формате ЧЧ:ММ:СС
-    std::string getTextFormat() const {
-        int hours = (seconds / 3600) % 24;
-        int minutes = (seconds % 3600) / 60;
-        int sec = seconds % 60;
-        // создает объект oss, который представляет собой поток вывода, работающий со строками
-        std::ostringstream oss;
-        oss << std::setw(2) << std::setfill('0') << hours << ":"
-            << std::setw(2) << std::setfill('0') << minutes << ":"
-            << std::setw(2) << std::setfill('0') << sec;
-        return oss.str();
-    }
-
-    // Вывод текущего времени в формате ЧЧ:ММ:СС
-    void print() const {
-        std::cout << "Текущее время: " << getTextFormat() << std::endl;
-    }
-
-    // Метод для получения текущего часа
-    int getCurrentHour() const {
-        return (seconds / 3600) % 24;
-    }
-
-    // Метод для получения минут с начала текущего часа
-    int getMinutesFromCurrentHour() const {
-        return (seconds % 3600) / 60;
-    }
-
-    // Метод для получения секунд с начала текущей минуты
-    int getSecondsFromCurrentMinute() const {
-        return seconds % 60;
-    }
-
-    // Метод для получения общего количества часов
-    int getTotalHours() const {
-        return seconds / 3600;
-    }
-
-    // Метод для получения общего количества минут
-    int getTotalMinutes() const {
-        return seconds / 60;
-    }
-
-    // Метод для получения общего количества секунд
-    int getTotalSeconds() const {
-        return seconds;
-    }
+    // Методы для получения общего количества часов, минут и секунд
+    int getTotalHours() const;
+    int getTotalMinutes() const;
+    int getTotalSeconds() const;
 };
 
-
-
-
-
-#endif //UNTITLED3_NAME_H
+#endif // TIME_H
