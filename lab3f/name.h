@@ -1,43 +1,25 @@
-#ifndef UNTITLED3_NAME_H
-#define UNTITLED3_NAME_H
+// Name.h
+#ifndef NAME_H
+#define NAME_H
 
-
-#include <iostream>
 #include <string>
-#include <iomanip>
-#include <sstream>
-#include <vector>
-using namespace std;
 
-// Класс Name
+// Объявление класса Name
 class Name {
 private:
-    string surname;      // Фамилия
-    string first_name;   // Имя
-    string patronymic;   // Отчество
+    std::string surname;      // Фамилия
+    std::string first_name;   // Имя
+    std::string patronymic;   // Отчество
 
 public:
-    // Конструктор с параметрами по умолчанию
-    Name(string s = "", string f = "", string p = "") : surname(s), first_name(f), patronymic(p) {}
+    // Конструктор с параметрами
+    Name(std::string s = "", std::string f = "", std::string p = "");
 
-    // Метод для вывода в строковом виде
-    void print() const {
-        if (!surname.empty()) cout << surname;
-        if (!first_name.empty()) cout << (surname.empty() ? "" : " ") << first_name;
-        if (!patronymic.empty()) cout << ((surname.empty() && first_name.empty()) ? "" : " ") << patronymic;
-        cout << endl;
-    }
+    // Метод для вывода имени
+    void print() const;
 
-    // Преобразование к строковому виду
-    string to_string() const {
-        string result;
-        if (!surname.empty()) result += surname;
-        if (!first_name.empty()) result += (result.empty() ? "" : " ") + first_name;
-        if (!patronymic.empty()) result += (result.empty() ? "" : " ") + patronymic;
-        return result;
-    }
+    // Метод для преобразования к строковому виду
+    std::string to_string() const;
 };
 
-
-
-#endif //UNTITLED3_NAME_H
+#endif // NAME_H
